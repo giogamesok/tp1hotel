@@ -1,6 +1,6 @@
 //
 // Created by Leonardo Sequeira on 15/11/25.
-//
+// Edited by Victor Montibello Loureiro on 22/11/25.
 
 #include "../../include/implementacao/HospedeService.h"
 #include "../../include/entidades/Hospede.h"
