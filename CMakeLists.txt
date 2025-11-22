@@ -1,11 +1,10 @@
-cmake_minimum_required(VERSION 3.16)  
-project(TP1Hotel VERSION 1.0 LANGUAGES CXX)
-
+cmake_minimum_required(VERSION 3.16)
+project(TPIHotel VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Arquivos fonte do projeto
+
 set(SOURCES
     src/main.cpp
     src/hotel.cpp
@@ -14,28 +13,57 @@ set(SOURCES
     src/hospede.cpp
     src/reserva.cpp
     src/hotel_service.cpp
+    
 )
 
-# Arquivos de cabeçalho
+
 set(HEADERS
-    include/hotel.h
-    include/quarto.h
-    include/gerente.h
-    include/hospede.h
-    include/reserva.h
-    include/hotel_service.h
-    include/id_generator.h
+    
+    entidades/Gerente.h
+    entidades/Hospede.h
+    entidades/Hotel.h
+    entidades/Pessoa.h
+    entidades/Quarto.h
+    entidades/Reserva.h
+    
+  
+    implementacao/HotelService.h
+    implementacao/GerenteService.h
+    implementacao/HospedeService.h
+    implementacao/QuartoService.h
+    implementacao/ReservaService.h
+    
+    
+    interfaces/IHotelService.h
+    interfaces/IGerenteService.h
+    interfaces/IHospedeService.h
+    interfaces/IQuartoService.h
+    interfaces/IReservaService.h
+    
+  
+    dominios/Capacidade.h
+    dominios/Cartao.h
+    dominios/Codigo.h
+    dominios/Data.h
+    dominios/Dinheiro.h
+    dominios/Email.h
+    dominios/Endereco.h
+    dominios/Nome.h
+    dominios/Numero.h
+    dominios/Ramal.h
+    dominios/Senha.h
+    dominios/Telefone.h
 )
 
-# Diretórios de include
-include_directories(include)
 
+include_directories(
+    include
+    entidades
+    implementacao
+    interfaces
+    dominios
+)
 
-add_executable(TP1Hotel ${SOURCES} ${HEADERS})
+add_executable(TPIHotel ${SOURCES} ${HEADERS})
 
-target_compile_features(TP1Hotel PRIVATE cxx_std_11)
-
-
-if(WIN32)
-    target_link_libraries(TP1Hotel)
-endif()
+target_compile_features(TPIHotel PRIVATE cxx_std_11)

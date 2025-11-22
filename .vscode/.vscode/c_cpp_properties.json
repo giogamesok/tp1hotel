@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "Windows",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/include/**",
+                "${workspaceFolder}/include/dominios",
+                "${workspaceFolder}/include/entidades", 
+                "${workspaceFolder}/include/implementacao",
+                "${workspaceFolder}/include/interfaces",
+                "${workspaceFolder}/src"
+            ],
+            "defines": [],
+            "compilerPath": "C:/mingw64/bin/g++.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-gcc-x64",
+            "configurationProvider": "ms-vscode.cmake-tools"
+        }
+    ],
+    "version": 4
+}

@@ -81,18 +81,16 @@ private:
             std::cout << "Criando objetos de domínio e entidades..." << std::endl;
             pausar();
 
-            
+           
             limparTela();
             exibirCabecalho("FASE 1 - CRIAÇÃO DE OBJETOS");
             
-            std::cout << " Criando Hotel 'Hotel Premium'..." << std::endl;
-            Nome nomeHotel("Hotel Premium");  
-            Endereco enderecoHotel("Rua das Flores, 123");  
-            Telefone telefoneHotel("+551112345678");  
-            Codigo codigoHotel("h123456789"); 
-            Ramal ramalGerente("25");  
-            Senha senhaGerente("A1b#c");  
-            Gerente gerente(Nome("Carlos Silva"), Email("carlos@example.com"), ramalGerente, senhaGerente);
+            std::cout << " Criando Hotel 'HotelXYZ'..." << std::endl;
+            Nome nomeHotel("HotelXYZ");
+            Endereco enderecoHotel("Rua ABC, 123");
+            Telefone telefoneHotel("+5511987654321");
+            Codigo codigoHotel("abc123def4");
+            Gerente gerente(Nome("Carlos Silva"), Email("carlo@example.com"), Ramal("12"), Senha("A1b#c"));
 
             Hotel hotel(nomeHotel, enderecoHotel, telefoneHotel, codigoHotel, gerente);
             HotelService hotelService;
@@ -103,12 +101,12 @@ private:
             limparTela();
             exibirCabecalho("FASE 1 - CRIAÇÃO DE OBJETOS");
             std::cout << " Criando Quarto número 49..." << std::endl;
-            Numero numero(49);  
-            Capacidade capacidade(2);  
-            Dinheiro diaria(300.00);  
-            Ramal ramalQuarto("15");  
-            Codigo codigoQuarto("q123456789");  
-            Quarto quarto(numero, capacidade, diaria, ramalQuarto, codigoQuarto);
+            Numero numero(49);
+            Capacidade capacidade(2);
+            Dinheiro diaria(300.00);
+            Ramal ramal("50");
+            Codigo codigoQuarto("qwe456rty2");
+            Quarto quarto(numero, capacidade, diaria, ramal, codigoQuarto);
             QuartoService quartoService;
             quartoService.adicionarQuarto(quarto);
             std::cout << " Quarto criado com sucesso!" << std::endl;
@@ -117,43 +115,43 @@ private:
             limparTela();
             exibirCabecalho("FASE 1 - CRIAÇÃO DE OBJETOS");
             std::cout << " Criando Reserva..." << std::endl;
-            Data chegada(15, "NOV", 2024);  
-            Data partida(20, "NOV", 2024);  
-            Dinheiro valorReserva(1500.00);  
-            Codigo codigoReserva("r123456789");  
+            Data chegada(10, "NOV", 2025);
+            Data partida(15, "NOV", 2025);
+            Dinheiro valorReserva(1500.00);
+            Codigo codigoReserva("res1234567");
             Reserva reserva(chegada, partida, valorReserva, codigoReserva);
             ReservaService reservaService;
             reservaService.criarReserva(reserva);
-            std::cout << "Reserva criada com sucesso!" << std::endl;
+            std::cout << " Reserva criada com sucesso!" << std::endl;
             pausar();
 
             limparTela();
             exibirCabecalho("FASE 1 - CRIAÇÃO DE OBJETOS");
-            std::cout << "Criando Gerente 'Carlos Silva'..." << std::endl;
+            std::cout << " Criando Gerente 'Carlos Silva'..." << std::endl;
             GerenteService gerenteService;
             gerenteService.criarGerente(gerente);
-            std::cout << "Gerente criado com sucesso!" << std::endl;
+            std::cout << " Gerente criado com sucesso!" << std::endl;
             pausar();
 
             limparTela();
             exibirCabecalho("FASE 1 - CRIAÇÃO DE OBJETOS");
-            std::cout << "Criando Hóspede 'Ana Pereira'..." << std::endl;
-            Email emailHospede("ana.pereira@email.com");  
-            Endereco enderecoHospede("Avenida Brasil, 456");  
-            Cartao cartaoHospede("4539578763621486"); 
+            std::cout << " Criando Hóspede 'Ana Pereira'..." << std::endl;
+            Email emailHospede("ana@email.com");
+            Endereco enderecoHospede("Av. Brasil, 456");
+            Cartao cartaoHospede("4532015112830366");
             Hospede hospede(Nome("Ana Pereira"), emailHospede, enderecoHospede, cartaoHospede);
             HospedeService hospedeService;
             hospedeService.criarHospede(hospede);
-            std::cout << "Hóspede criado com sucesso!" << std::endl;
+            std::cout << " Hóspede criado com sucesso!" << std::endl;
             pausar();
 
-           
+            
             limparTela();
             exibirCabecalho("FASE 2 - RELATÓRIO FINAL");
             
             std::cout << "\n RESUMO DE CADASTROS:\n" << std::endl;
 
-            std::cout << "HOTÉIS CADASTRADOS: " << hotelService.listarHoteis().size() << std::endl;
+            std::cout << " HOTÉIS CADASTRADOS: " << hotelService.listarHoteis().size() << std::endl;
             for (const auto& h : hotelService.listarHoteis()) {
                 std::cout << "   • Nome: " << h.getNome().getValor() 
                           << ", Endereço: " << h.getEndereco().getValor() << std::endl;
@@ -186,14 +184,12 @@ private:
             }
 
             std::cout << "\n DEMONSTRAÇÃO CONCLUÍDA COM SUCESSO!" << std::endl;
-            std::cout << "TODOS OS DOMÍNIOS RESPEITAM OS CRITÉRIOS DE VALIDAÇÃO" << std::endl;
             pausar();
 
         } catch (const std::exception& ex) {
             limparTela();
             exibirCabecalho("ERRO NA DEMONSTRAÇÃO");
-            std::cerr << "Erro de validação: " << ex.what() << std::endl;
-            std::cerr << "Verifique os critérios dos domínios!" << std::endl;
+            std::cerr << "Erro: " << ex.what() << std::endl;
             pausar();
         }
     }
