@@ -85,7 +85,7 @@ private:
             limparTela();
             exibirCabecalho("FASE 1 - CRIAÇÃO DE OBJETOS");
             
-            std::cout << "▶ Criando Hotel 'HotelXYZ'..." << std::endl;
+            std::cout << " Criando Hotel 'HotelXYZ'..." << std::endl;
             Nome nomeHotel("HotelXYZ");
             Endereco enderecoHotel("Rua ABC, 123");
             Telefone telefoneHotel("+5511987654321");
