@@ -90,7 +90,7 @@ private:
             Endereco enderecoHotel("Rua ABC, 123");
             Telefone telefoneHotel("+5511987654321");
             Codigo codigoHotel("abc123def4");
-            Gerente gerente(Nome("Carlos Silva"), Email("carlo@example.com"), Ramal("1234"), Senha("Senha@123"));
+            Gerente gerente(Nome("Carlos Silva"), Email("carlo@example.com"), Ramal("12"), Senha("A1b#c"));
 
             Hotel hotel(nomeHotel, enderecoHotel, telefoneHotel, codigoHotel, gerente);
             HotelService hotelService;
@@ -104,7 +104,7 @@ private:
             Numero numero(49);
             Capacidade capacidade(2);
             Dinheiro diaria(300.00);
-            Ramal ramal("5678");
+            Ramal ramal("50");
             Codigo codigoQuarto("qwe456rty2");
             Quarto quarto(numero, capacidade, diaria, ramal, codigoQuarto);
             QuartoService quartoService;
