@@ -81,7 +81,7 @@ private:
             std::cout << "Criando objetos de domínio e entidades..." << std::endl;
             pausar();
 
-            // FASE 1: Criação dos objetos (mantendo SEUS valores originais)
+           
             limparTela();
             exibirCabecalho("FASE 1 - CRIAÇÃO DE OBJETOS");
             
