@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <limits>
 #include "implementacao/HotelService.h"
 #include "implementacao/ReservaService.h"
 #include "implementacao/GerenteService.h"
@@ -23,81 +24,179 @@
 #include "entidades/Hospede.h"
 #include "entidades/Quarto.h"
 
-int main() {
-    try {
-        // Criar objetos domínios e entidades
-        Nome nomeHotel("HotelXYZ");
-        Endereco enderecoHotel("Rua ABC, 123");
-        Telefone telefoneHotel("+5511987654321");
-        Codigo codigoHotel("abc123def4");
-        Gerente gerente(Nome("Carlos Silva"), Email("carlo@example.com"), Ramal("1234"), Senha("Senha@123"));
-
-        Hotel hotel(nomeHotel, enderecoHotel, telefoneHotel, codigoHotel, gerente);
-        HotelService hotelService;
-        hotelService.criarHotel(hotel);
-
-        Numero numero(49);
-        Capacidade capacidade(2);
-        Dinheiro diaria(300.00);
-        Ramal ramal("5678");
-        Codigo codigoQuarto("qwe456rty2");
-        Quarto quarto(numero, capacidade, diaria, ramal, codigoQuarto);
-        QuartoService quartoService;
-        quartoService.adicionarQuarto(quarto);
-
-        Data chegada(10, "NOV", 2025);
-        Data partida(15, "NOV", 2025);
-        Dinheiro valorReserva(1500.00);
-        Codigo codigoReserva("res1234567");
-        Reserva reserva(chegada, partida, valorReserva, codigoReserva);
-        ReservaService reservaService;
-        reservaService.criarReserva(reserva);
-
-        GerenteService gerenteService;
-        gerenteService.criarGerente(gerente);
-
-        Email emailHospede("ana@email.com");
-        Endereco enderecoHospede("Av. Brasil, 456");
-        Cartao cartaoHospede("4532015112830366");
-        Hospede hospede(Nome("Ana Pereira"), emailHospede, enderecoHospede, cartaoHospede);
-        HospedeService hospedeService;
-        hospedeService.criarHospede(hospede);
-
-        // Mostrar a quantidade cadastrada
-        std::cout << "Hotéis cadastrados: " << hotelService.listarHoteis().size() << std::endl;
-        for (const auto& h : hotelService.listarHoteis()) {
-            std::cout << "- Nome: " << h.getNome().getValor() << ", Endereço: " << h.getEndereco().getValor() << std::endl;
-        }
-
-        std::cout << "Quartos cadastrados: " << quartoService.listarQuartos().size() << std::endl;
-        for (const auto& q : quartoService.listarQuartos()) {
-            std::cout << "- Número: " << q.getNumero().getValor()
-                      << ", Capacidade: " << q.getCapacidade().getValor()
-                      << ", Diária: " << q.getDiaria().getValor() << std::endl;
-        }
-
-        std::cout << "Reservas cadastradas: " << reservaService.listarReservas().size() << std::endl;
-        for (const auto& r : reservaService.listarReservas()) {
-            std::cout << "- Código: " << r.getCodigo().getValor()
-                      << ", Chegada: " << r.getChegada().getData()
-                      << ", Partida: " << r.getPartida().getData() << std::endl;
-        }
-
-        std::cout << "Gerentes cadastrados: " << gerenteService.listarGerentes().size() << std::endl;
-        for (const auto& g : gerenteService.listarGerentes()) {
-            std::cout << "- Nome: " << g.getNome().getValor()
-                      << ", Ramal: " << g.getRamal().getValor() << std::endl;
-        }
-
-        std::cout << "Hóspedes cadastrados: " << hospedeService.listarHospedes().size() << std::endl;
-        for (const auto& p : hospedeService.listarHospedes()) {
-            std::cout << "- Nome: " << p.getNome().getValor()
-                      << ", Email: " << p.getEmail().getValor() << std::endl;
-        }
-
-    } catch (const std::exception& ex) {
-        std::cerr << "Erro: " << ex.what() << std::endl;
+class InterfaceConsole {
+private:
+    void limparTela() {
+        #ifdef _WIN32
+            system("cls");
+        #else
+            system("clear");
+        #endif
     }
 
+    void pausar() {
+        std::cout << "\nPressione Enter para continuar...";
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin.get();
+    }
+
+    void exibirCabecalho(const std::string& titulo) {
+        std::cout << "==================================" << std::endl;
+        std::cout << "    " << titulo << std::endl;
+        std::cout << "==================================" << std::endl;
+    }
+
+public:
+    void executar() {
+        int opcao;
+        do {
+            limparTela();
+            exibirCabecalho("SISTEMA DE HOTEL");
+            std::cout << "1. Executar Demonstração" << std::endl;
+            std::cout << "2. Sair" << std::endl;
+            std::cout << "==================================" << std::endl;
+            std::cout << "Escolha uma opção: ";
+            std::cin >> opcao;
+
+            switch (opcao) {
+                case 1:
+                    executarDemonstracao();
+                    break;
+                case 2:
+                    std::cout << "Saindo do sistema..." << std::endl;
+                    break;
+                default:
+                    std::cout << "Opção inválida!" << std::endl;
+                    pausar();
+            }
+        } while (opcao != 2);
+    }
+
+private:
+    void executarDemonstracao() {
+        try {
+            limparTela();
+            exibirCabecalho("INICIANDO DEMONSTRAÇÃO");
+            
+            std::cout << "Criando objetos de domínio e entidades..." << std::endl;
+            pausar();
+
+            // FASE 1: Criação dos objetos (mantendo SEUS valores originais)
+            limparTela();
+            exibirCabecalho("FASE 1 - CRIAÇÃO DE OBJETOS");
+            
+            std::cout << "▶ Criando Hotel 'HotelXYZ'..." << std::endl;
+            Nome nomeHotel("HotelXYZ");
+            Endereco enderecoHotel("Rua ABC, 123");
+            Telefone telefoneHotel("+5511987654321");
+            Codigo codigoHotel("abc123def4");
+            Gerente gerente(Nome("Carlos Silva"), Email("carlo@example.com"), Ramal("1234"), Senha("Senha@123"));
+
+            Hotel hotel(nomeHotel, enderecoHotel, telefoneHotel, codigoHotel, gerente);
+            HotelService hotelService;
+            hotelService.criarHotel(hotel);
+            std::cout << " Hotel criado com sucesso!" << std::endl;
+            pausar();
+
+            limparTela();
+            exibirCabecalho("FASE 1 - CRIAÇÃO DE OBJETOS");
+            std::cout << " Criando Quarto número 49..." << std::endl;
+            Numero numero(49);
+            Capacidade capacidade(2);
+            Dinheiro diaria(300.00);
+            Ramal ramal("5678");
+            Codigo codigoQuarto("qwe456rty2");
+            Quarto quarto(numero, capacidade, diaria, ramal, codigoQuarto);
+            QuartoService quartoService;
+            quartoService.adicionarQuarto(quarto);
+            std::cout << " Quarto criado com sucesso!" << std::endl;
+            pausar();
+
+            limparTela();
+            exibirCabecalho("FASE 1 - CRIAÇÃO DE OBJETOS");
+            std::cout << " Criando Reserva..." << std::endl;
+            Data chegada(10, "NOV", 2025);
+            Data partida(15, "NOV", 2025);
+            Dinheiro valorReserva(1500.00);
+            Codigo codigoReserva("res1234567");
+            Reserva reserva(chegada, partida, valorReserva, codigoReserva);
+            ReservaService reservaService;
+            reservaService.criarReserva(reserva);
+            std::cout << " Reserva criada com sucesso!" << std::endl;
+            pausar();
+
+            limparTela();
+            exibirCabecalho("FASE 1 - CRIAÇÃO DE OBJETOS");
+            std::cout << " Criando Gerente 'Carlos Silva'..." << std::endl;
+            GerenteService gerenteService;
+            gerenteService.criarGerente(gerente);
+            std::cout << " Gerente criado com sucesso!" << std::endl;
+            pausar();
+
+            limparTela();
+            exibirCabecalho("FASE 1 - CRIAÇÃO DE OBJETOS");
+            std::cout << " Criando Hóspede 'Ana Pereira'..." << std::endl;
+            Email emailHospede("ana@email.com");
+            Endereco enderecoHospede("Av. Brasil, 456");
+            Cartao cartaoHospede("4532015112830366");
+            Hospede hospede(Nome("Ana Pereira"), emailHospede, enderecoHospede, cartaoHospede);
+            HospedeService hospedeService;
+            hospedeService.criarHospede(hospede);
+            std::cout << " Hóspede criado com sucesso!" << std::endl;
+            pausar();
+
+            
+            limparTela();
+            exibirCabecalho("FASE 2 - RELATÓRIO FINAL");
+            
+            std::cout << "\n RESUMO DE CADASTROS:\n" << std::endl;
+
+            std::cout << " HOTÉIS CADASTRADOS: " << hotelService.listarHoteis().size() << std::endl;
+            for (const auto& h : hotelService.listarHoteis()) {
+                std::cout << "   • Nome: " << h.getNome().getValor() 
+                          << ", Endereço: " << h.getEndereco().getValor() << std::endl;
+            }
+
+            std::cout << "\n QUARTOS CADASTRADOS: " << quartoService.listarQuartos().size() << std::endl;
+            for (const auto& q : quartoService.listarQuartos()) {
+                std::cout << "   • Número: " << q.getNumero().getValor()
+                          << ", Capacidade: " << q.getCapacidade().getValor()
+                          << ", Diária: R$ " << q.getDiaria().getValor() << std::endl;
+            }
+
+            std::cout << "\n RESERVAS CADASTRADAS: " << reservaService.listarReservas().size() << std::endl;
+            for (const auto& r : reservaService.listarReservas()) {
+                std::cout << "   • Código: " << r.getCodigo().getValor()
+                          << ", Chegada: " << r.getChegada().getData()
+                          << ", Partida: " << r.getPartida().getData() << std::endl;
+            }
+
+            std::cout << "\n GERENTES CADASTRADOS: " << gerenteService.listarGerentes().size() << std::endl;
+            for (const auto& g : gerenteService.listarGerentes()) {
+                std::cout << "   • Nome: " << g.getNome().getValor()
+                          << ", Ramal: " << g.getRamal().getValor() << std::endl;
+            }
+
+            std::cout << "\n HÓSPEDES CADASTRADOS: " << hospedeService.listarHospedes().size() << std::endl;
+            for (const auto& p : hospedeService.listarHospedes()) {
+                std::cout << "   • Nome: " << p.getNome().getValor()
+                          << ", Email: " << p.getEmail().getValor() << std::endl;
+            }
+
+            std::cout << "\n DEMONSTRAÇÃO CONCLUÍDA COM SUCESSO!" << std::endl;
+            pausar();
+
+        } catch (const std::exception& ex) {
+            limparTela();
+            exibirCabecalho("ERRO NA DEMONSTRAÇÃO");
+            std::cerr << "Erro: " << ex.what() << std::endl;
+            pausar();
+        }
+    }
+};
+
+int main() {
+    InterfaceConsole interface;
+    interface.executar();
     return 0;
 }

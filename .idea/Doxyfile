@@ -1,0 +1,42 @@
+# Configuração básica do Doxygen
+PROJECT_NAME           = "TP1 Hotel Management System"
+PROJECT_NUMBER         = 1.0
+PROJECT_BRIEF          = "Sistema de gerenciamento de hotéis"
+
+OUTPUT_DIRECTORY       = docs
+CREATE_SUBDIRS         = NO
+ALLOW_UNICODE_NAMES    = YES
+
+# Linguagem de saída
+OUTPUT_LANGUAGE        = Portuguese
+
+# Gerar HTML
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_FILE_EXTENSION    = .html
+HTML_COLORSTYLE_HUE    = 120
+HTML_TIMESTAMP         = YES
+
+# Gerar LaTeX
+GENERATE_LATEX         = NO
+
+# Configurações de extração
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+
+# Diretórios de entrada
+INPUT                  = include src
+RECURSIVE              = YES
+
+# Extensões de arquivo
+FILE_PATTERNS          = *.h *.cpp
+
+# Configurações específicas do C++
+OPTIMIZE_OUTPUT_FOR_C  = NO
+BUILTIN_STL_SUPPORT    = YES
+
+# Diagramas (se Graphviz estiver instalado)
+HAVE_DOT               = YES
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
