@@ -1,2 +1,5 @@
 https://youtu.be/ubPxjKcXYBM
 Vídeo de demonstração do trabalho acima
+PARTICIPANTES: 
+LEONARDO NEHRER SEQUEIRA - 221039970
+VICTOR MONTIBELLO LOUREIRO - 241004630
